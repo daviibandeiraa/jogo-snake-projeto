@@ -6,6 +6,7 @@ const finalScore = document.querySelector(".final-score > span")
 const menu = document.querySelector(".menu-screen")
 const buttonPlay = document.querySelector(".btn-play")
 
+
 const audio = new Audio("../assets/audio.mp3")
 
 const size = 30
@@ -14,6 +15,10 @@ const initialPosition = { x: 270, y: 240 }
 
 let snake = [initialPosition]
 
+const hideInstructions = () => {
+    const instructions = document.querySelector(".instructions")
+    instructions.style.display = "none"
+}
 const incrementScore = () => {
     score.innerText = +score.innerText + 10
 }
@@ -167,6 +172,8 @@ const gameLoop = () => {
     loopId = setTimeout(() => {
         gameLoop()
     }, 300)
+
+    
 }
 
 gameLoop()
@@ -187,12 +194,14 @@ document.addEventListener("keydown", ({ key }) => {
     if (key == "ArrowUp" && direction != "down") {
         direction = "up"
     }
+    hideInstructions();
 })
 
 buttonPlay.addEventListener("click", () => {
     score.innerText = "00"
     menu.style.display = "none"
     canvas.style.filter = "none"
+
 
     snake = [initialPosition]
 })
